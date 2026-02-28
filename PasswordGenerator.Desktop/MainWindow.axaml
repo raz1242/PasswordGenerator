@@ -1,0 +1,84 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:compilerservices="using:Microsoft.VisualBasic.CompilerServices"
+        x:Class="PasswordGenerator.Desktop.MainWindow"
+        Title="PasswordGenerator"
+        Width="330" Height="450"
+        CanResize="True"
+        Background="DarkSlateGray"
+        WindowStartupLocation="CenterScreen">
+    
+    <StackPanel Margin="15" Spacing="7">
+        <!-- Title -->
+        <TextBlock Text="PASSWORD GENERATOR" 
+                   FontSize="18" 
+                   Foreground="WhiteSmoke"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center" 
+                   Margin="0,0,0,10"/>
+
+        <!-- Password Length -->
+        <TextBlock Text="Password Length (8-24):" Foreground="WhiteSmoke" />
+        <NumericUpDown x:Name="NumericLength" 
+                       Minimum="8" 
+                       Maximum="24" 
+                       Value="16" 
+                       Width="120" 
+                       FormatString="0"
+                       Foreground="WhiteSmoke"
+                       HorizontalAlignment="Left"/>
+
+        <!-- Password Type -->
+        <TextBlock Text="Password Type:" Margin="0,10,0,0" Foreground="WhiteSmoke"/>
+        <RadioButton x:Name="RadioAlphaSymbols" 
+                     Content="Alphanumerical + Symbols" 
+                     Foreground="WhiteSmoke"
+                     IsChecked="True" 
+                     GroupName="PassType"/>
+        <RadioButton x:Name="RadioAlpha" 
+                     Content="Alphanumerical" 
+                     Foreground="WhiteSmoke"
+                     GroupName="PassType"/>
+        <RadioButton x:Name="RadioNumbers" 
+                     Foreground="WhiteSmoke"
+                     Content="Numbers" 
+                     GroupName="PassType"/>
+
+        <!-- Settings -->
+        <CheckBox x:Name="CheckAutoCopy" 
+                  Content="Copy to Clipboard" 
+                  Foreground="WhiteSmoke"
+                  Margin="0,10,0,5"/>
+
+        <!-- Action Buttons Grid -->
+        <Grid ColumnDefinitions="*,*" Margin="0,10,0,10">
+            <Button x:Name="BtnGenerate"
+                    Content="Generate Password" 
+                    FontWeight="Bold"
+                    Foreground="WhiteSmoke"
+                    Click="BtnGenerate_Click" 
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center"
+                    
+                    Margin="0,-30,-20,-30"/>
+            
+            <Button x:Name="BtnCopy" 
+                    Content="Copy Password" 
+                    Foreground="WhiteSmoke"
+                    Click="BtnCopy_Click" 
+                    Grid.Column="1" 
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center" 
+                    Margin="28,0,0,0"/>
+        </Grid>
+
+        <!-- Result -->
+        <TextBlock Text="Generated Password:" Foreground="WhiteSmoke"/>
+        <TextBox x:Name="TxtResult" 
+                 FontWeight="Bold" 
+                 Foreground="WhiteSmoke"
+                 FontSize="16" 
+                 IsReadOnly="True" />
+    </StackPanel>
+</Window>
