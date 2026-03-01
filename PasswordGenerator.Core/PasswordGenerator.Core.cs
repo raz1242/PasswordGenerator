@@ -4,18 +4,20 @@ using System.Security.Cryptography;
 
 namespace PasswordGenerator.Core
 {
-    public enum PasswordType {
+    public enum PasswordType { // Enum to represent the different types of passwords that can be generated
         AlphanumericSpecial = 1,
         Alphanumeric = 2,
         Numeric = 3
     }
-
+    
     public static class GeneratePassword {
         const string NumericChars = "0123456789";
         const string AlphaChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const string SpecialChars = "!@#$%^&*()_+";
 
 
+        /* Method to get the character pool based on the selected password type
+         */
         static string GetCharacterPool(PasswordType type) {
             return type switch {
                 PasswordType.AlphanumericSpecial => NumericChars + AlphaChars + SpecialChars,
@@ -25,6 +27,9 @@ namespace PasswordGenerator.Core
             };
         }
 
+        /* Method to generate a password based on the specified length and type
+         * It ensures that no two consecutive characters are the same and that the password meets the required character type distribution
+         */
         public static string RunGeneratePassword(int length, PasswordType type) {
             string charPool = GetCharacterPool(type);
             char[] password = new char[length];
@@ -48,6 +53,9 @@ namespace PasswordGenerator.Core
             }
         }
 
+        /* Method to validate the generated password based on the required character type distribution
+         * It checks if the password contains at least a certain number of characters from each required category (numeric, alphabetic, special)
+         */
         static bool IsPasswordValid(string password, int length, PasswordType type) {
             int requiredCount = length / 4;
 
@@ -64,7 +72,9 @@ namespace PasswordGenerator.Core
             return true;
         }
 
-        /*
+        /* tools for debbuging and testing the core logic in a console application
+         * These methods are not used in the desktop application but can be helpful for validating the password generation logic independently
+
         static int GetPasswordLength() {
             while (true) {
                 Console.Write("Enter password length (8-24 characters, default's 16): ");
