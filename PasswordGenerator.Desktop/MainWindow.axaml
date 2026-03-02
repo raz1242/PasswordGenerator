@@ -61,7 +61,6 @@
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Center" 
                     VerticalContentAlignment="Center"
-                    
                     Margin="0,-30,-20,-30"/>
             
             <Button x:Name="BtnCopy" 

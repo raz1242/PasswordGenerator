@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 
 namespace PasswordGenerator.Core
 {
@@ -36,7 +34,7 @@ namespace PasswordGenerator.Core
             char lastUsedChar = '\0';
 
             while (true) {
-                for (int i = 0; i < length; i++) {
+                for (int i = 0; i < length; i++) { // Generate a random character from the pool, ensuring it's not the same as the last used character
                     char nextChar;
                     do {
                         int randomIndex = RandomNumberGenerator.GetInt32(0, charPool.Length);
@@ -48,7 +46,7 @@ namespace PasswordGenerator.Core
                     lastUsedChar = nextChar;
                 }
 
-                if (IsPasswordValid(new string(password), length, type))
+                if (IsPasswordValid(new string(password), length, type)) // Validate the generated password against the required character type distribution
                     return new string(password);
             }
         }

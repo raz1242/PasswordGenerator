@@ -1,13 +1,23 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using System;
-using System.Linq;
 using PasswordGenerator.Core;
+using System;
 
 namespace PasswordGenerator.Desktop {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+        }
+
+
+        /* Helper method to copy text to the clipboard using Avalonia's clipboard API.
+         * It retrieves the clipboard instance from the top-level window and sets the provided text asynchronously.
+         */
+        private async void CopyToClipboard(string text) {
+            var clipboard = TopLevel.GetTopLevel(this)?.Clipboard; // Get the clipboard instance from the top-level window
+            if (clipboard != null) {
+                await clipboard.SetTextAsync(text);
+            }
         }
 
         /* Event handler for the "Generate" button click.
@@ -26,7 +36,10 @@ namespace PasswordGenerator.Desktop {
                 type = PasswordType.Numeric;
 
             String characterSet = GeneratePassword.RunGeneratePassword(length, type); // Generate the password using the core logic
-            TxtResult.Text = characterSet; 
+            TxtResult.Text = characterSet; // Display the generated password in the result textbox
+
+            if (!string.IsNullOrEmpty(characterSet)) // If a password was generated, copy it to the clipboard
+                CopyToClipboard(characterSet);
         }
 
         /* Event handler for the "Copy" button click.
@@ -36,16 +49,6 @@ namespace PasswordGenerator.Desktop {
         private void BtnCopy_Click(object sender, RoutedEventArgs e) {
             if (!string.IsNullOrEmpty(TxtResult.Text)) { // Check if there is a generated password to copy
                 CopyToClipboard(TxtResult.Text);
-            }
-        }
-
-        /* Helper method to copy text to the clipboard using Avalonia's clipboard API.
-         * It retrieves the clipboard instance from the top-level window and sets the provided text asynchronously.
-         */
-        private async void CopyToClipboard(string text) {
-            var clipboard = TopLevel.GetTopLevel(this)?.Clipboard; // Get the clipboard instance from the top-level window
-            if (clipboard != null) {
-                await clipboard.SetTextAsync(text);
             }
         }
     }
