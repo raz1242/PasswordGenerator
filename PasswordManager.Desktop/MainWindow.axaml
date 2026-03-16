@@ -1,0 +1,176 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PasswordManager.Desktop.MainWindow"
+        Title="Password Manager"
+        Width="900" Height="600"
+        CanResize="True"
+        Background="DarkSlateGray"
+        WindowStartupLocation="CenterScreen">
+
+    <!-- Main 2-Column Layout -->
+    <Grid ColumnDefinitions="225, *" 
+          Margin="15">
+        
+        <!-- LEFT COLUMN: Search & Password List -->
+        <Grid Grid.Column="0" 
+              RowDefinitions="Auto, *, Auto" 
+              Margin="0,0,15,0">
+            
+            <!-- Search Box -->
+            <TextBox x:Name="TxtSearch" 
+                     Grid.Row="0" 
+                     TextChanged="TxtSearch_TextChanged"
+                     Watermark="Search entries..." 
+                     Foreground="WhiteSmoke" 
+                     Margin="0,0,0,10"/>
+            
+            <!-- Password List -->
+            <ListBox x:Name="LstPasswords" 
+                     SelectionChanged="LstPasswords_SelectionChanged"
+                     Grid.Row="1" 
+                     Foreground="WhiteSmoke" 
+                     Background="#2F4F4F" 
+                     CornerRadius="3"
+                     Margin="0,0,0,10">
+            </ListBox>
+
+            <!-- Add Button -->
+            <Button x:Name="BtnAddEntry" 
+                    Grid.Row="2" 
+                    Content="+ Add New Entry" 
+                    Click="AddNewEntryButton_Click"
+                    FontWeight="Bold"
+                    Foreground="WhiteSmoke"
+                    HorizontalAlignment="Stretch" 
+                    HorizontalContentAlignment="Center" 
+                    VerticalContentAlignment="Center"/>
+        </Grid>
+
+        <!-- RIGHT COLUMN: Entry Details -->
+        <Border Grid.Column="1" 
+                Margin="15,20,15,40"
+                Background="#253F3F" 
+                CornerRadius="8" 
+                Padding="10">
+
+            <StackPanel Grid.Column="1" 
+                        Margin="15,20,0,0" 
+                        Spacing="9">
+
+            
+                <!-- Title -->
+                <TextBlock Text="ENTRY DETAILS" 
+                           FontSize="18" 
+                           Foreground="WhiteSmoke"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center" 
+                           Margin="0,0,0,0"/>
+
+                <!-- Title/Website -->
+                <Grid ColumnDefinitions="1*, 2.5*" Margin="0,0,0,10">
+                        <!-- LEFT COLUMN: Title -->
+                    <StackPanel Grid.Column="0" Margin="0,0,15,0">
+                        <TextBlock Text="Title:" Foreground="WhiteSmoke" Margin="0,0,0,5"/>
+                        <TextBox x:Name="TxtEntryTitle" Foreground="WhiteSmoke" />
+                    </StackPanel>
+
+                    <!-- RIGHT COLUMN: Website -->
+                    <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                        <TextBlock Text="Website:" Foreground="WhiteSmoke" Margin="0,0,0,5"/>
+                        <TextBox x:Name="TxtEntryWebsite" Foreground="WhiteSmoke" />
+                    </StackPanel>
+    
+                </Grid>
+
+                <!-- Username / Email -->
+                <TextBlock Text="Username / Email:" 
+                           Margin="0,0,0,0" 
+                           Foreground="WhiteSmoke" />
+                <Grid ColumnDefinitions="*, Auto, ">
+                    <TextBox x:Name="TxtUsername" 
+                             Grid.Column="0" 
+                             Foreground="WhiteSmoke" 
+                             Margin="0,0,10,0"/>
+                
+                    <Button x:Name="BtnCopyUsername" 
+                            Grid.Column="1" 
+                            Content="Copy" 
+                            Click="BtnCopyUsername_Click"
+                            Foreground="WhiteSmoke" 
+                            Width="75" 
+                            HorizontalContentAlignment="Center"/>
+                </Grid>
+
+                <!-- Password -->
+                <TextBlock Text="Password:" 
+                           Margin="0,10,0,0" 
+                           Foreground="WhiteSmoke" />
+                <Grid ColumnDefinitions="*, Auto, Auto">
+                    <TextBox x:Name="TxtPassword" 
+                             Grid.Column="0" 
+                             Foreground="WhiteSmoke" 
+                             PasswordChar='*' 
+                             Margin="0,0,10,0"/>
+                
+                    <Button x:Name="BtnShowPassword" 
+                            Grid.Column="1" 
+                            Content="Show" 
+                            Click="ShowPassword_Click"
+                            Foreground="WhiteSmoke" 
+                            Width="65" 
+                            HorizontalContentAlignment="Center"
+                            Margin="0,0,10,0"/>
+                        
+                    <Button x:Name="BtnCopyPassword" 
+                            Grid.Column="2" 
+                            Content="Copy"
+                            Click="CopyPassword_Click"
+                            Foreground="WhiteSmoke" 
+                            Width="75" 
+                            HorizontalContentAlignment="Center"/>
+                </Grid>
+
+                <!-- Notes -->
+                <TextBlock Text="Notes:" 
+                           Margin="0,10,0,0" 
+                           Foreground="WhiteSmoke" />
+                <TextBox x:Name="TxtNotes" 
+                         Foreground="WhiteSmoke" 
+                         AcceptsReturn="True" 
+                         TextWrapping="Wrap" 
+                         Height="65"/>
+
+                <!-- Bottom Action Buttons Grid -->
+                <Grid ColumnDefinitions="*,*,*" 
+                      Margin="0,20,0,0">
+                    <Button x:Name="BtnSave"
+                            Content="Save Entry"
+                            Click="BtnSave_Click"
+                            FontWeight="Bold"
+                            Foreground="WhiteSmoke"
+                            HorizontalAlignment="Stretch" 
+                            HorizontalContentAlignment="Center" 
+                            Margin="0,0,5,0"/>
+                
+                    <Button x:Name="BtnDelete" 
+                            Content="Delete" 
+                            Click="BtnDelete_Click"
+                            Foreground="WhiteSmoke"
+                            Grid.Column="1" 
+                            HorizontalAlignment="Stretch" 
+                            HorizontalContentAlignment="Center" 
+                            Margin="5,0,5,0"/>
+
+                    <Button x:Name="BtnOpenGenerator" 
+                            Content="Password Gen" 
+                            Click="PasswordGeneratorButton_Click"
+                            Foreground="WhiteSmoke"
+                            Grid.Column="2" 
+                            HorizontalAlignment="Stretch" 
+                            HorizontalContentAlignment="Center" 
+                            Margin="5,0,0,0"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
