@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace PasswordManager.Desktop;
 public partial class MainWindow : Window {
-    private readonly Core.PasswordManager _manager;
-
+    private readonly Core.PasswordRepository _manager;
 
     public MainWindow() {
         InitializeComponent();
 
         string myDbPath = Path.Combine(AppContext.BaseDirectory, "PasswordsData.db");
-        _manager = new Core.PasswordManager(myDbPath);
+        EncryptionService encryptionService = new();
+
+        _manager = new Core.PasswordRepository(myDbPath, encryptionService);
 
         _ = LoadAccountsList();
     }
@@ -89,12 +90,17 @@ public partial class MainWindow : Window {
                 !string.IsNullOrEmpty(TxtEntryWebsite.Text) &&
                 !string.IsNullOrEmpty(TxtUsername.Text) &&
                 !string.IsNullOrEmpty(TxtPassword.Text)) {
+                int savedIndex = LstPasswords.SelectedIndex;
+
                 if (selectedEntry.Id >= 0)
                     await _manager.ChangeAccountInDBAsync(selectedEntry.Id, TxtEntryTitle.Text, TxtEntryWebsite.Text, TxtUsername.Text, TxtPassword.Text);
                 else
                     await _manager.AddAccountToDBAsync(TxtEntryTitle.Text, TxtEntryWebsite.Text, TxtUsername.Text, TxtPassword.Text);
 
                 await LoadAccountsList();
+
+                if (savedIndex >= 0 && savedIndex < LstPasswords.Items.Count)
+                    LstPasswords.SelectedIndex = savedIndex;
             }
     }
 
