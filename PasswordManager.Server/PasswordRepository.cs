@@ -1,14 +1,16 @@
 ﻿using Microsoft.Data.Sqlite;
+using PasswordManager.Core;
 
-namespace PasswordManager.Core;
+namespace PasswordManager.Server;
 public class PasswordRepository {
     private readonly string _accountsConnectionString;
-    private readonly IEncryptionService _encryptionService;
+    private readonly EncryptionService _encryptionService;
 
-    public PasswordRepository(string dbPath, IEncryptionService encryptionService) {
+    public PasswordRepository(string dbPath, EncryptionService encryptionService) {
         _accountsConnectionString = $"Data Source={dbPath}";
         _encryptionService = encryptionService;
         InitializeDatabase();
+        InitializeEncryptionService();
     }
 
     public void InitializeDatabase() {
@@ -28,6 +30,10 @@ public class PasswordRepository {
             );";
 
         command.ExecuteNonQuery();
+    }
+
+    private static void InitializeEncryptionService() {
+        NetworkKeyManager.GetKey();
     }
 
     public async Task<Account?> GetAccountFromDBAsync(int id) {

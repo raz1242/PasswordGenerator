@@ -1,0 +1,89 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="PasswordManager.Desktop.SettingsWindow"
+        Title="Settings"
+        Width="550" Height="338"
+        CanResize="False"
+        Background="DarkSlateGray"
+        WindowStartupLocation="CenterOwner">
+
+    <Border Margin="25"
+            Background="#253F3F"
+            CornerRadius="10"
+            Padding="14">
+
+        <StackPanel Spacing="13">
+
+            <!-- Header -->
+            <TextBlock Text="CONNECTION SETTINGS"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       Foreground="WhiteSmoke"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,6"/>
+
+            <Rectangle Height="1" Fill="#4A7070" Margin="0,0,0,6"/>
+
+            <!-- Server URL -->
+            <StackPanel Spacing="5">
+                <TextBlock Text="Server URL" Foreground="#A8C8C8" FontSize="12"/>
+                <TextBox x:Name="TxtServerUrl"
+                         Foreground="WhiteSmoke"
+                         Background="#1E3535"
+                         BorderBrush="#4A7070"
+                         Watermark="e.g. http://192.168.1.100:5000"/>
+            </StackPanel>
+
+            <!-- API Key -->
+            <StackPanel Spacing="5">
+                <TextBlock Text="Pairing Key (from PAIRING_CODE.txt)" Foreground="#A8C8C8" FontSize="12"/>
+                <Grid ColumnDefinitions="*, Auto">
+                    <TextBox x:Name="TxtApiKey"
+                             Grid.Column="0"
+                             Foreground="WhiteSmoke"
+                             Background="#1E3535"
+                             BorderBrush="#4A7070"
+                             Watermark="Paste the key from your server here"
+                             Margin="0,0,8,0"/>
+                    <Button x:Name="BtnRevealKey"
+                            Grid.Column="1"
+                            Content="Show"
+                            Click="BtnRevealKey_Click"
+                            Foreground="WhiteSmoke"
+                            Width="60"
+                            HorizontalContentAlignment="Center"/>
+                </Grid>
+            </StackPanel>
+
+            <Rectangle Height="1" Fill="#4A7070" Margin="0,6,0,0"/>
+
+            <!-- Save / Cancel -->
+            <Grid ColumnDefinitions="*, *" Margin="0,4,0,0">
+                <Button x:Name="BtnSaveSettings"
+                        Content="Save Settings"
+                        Click="BtnSaveSettings_Click"
+                        FontWeight="Bold"
+                        Foreground="WhiteSmoke"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="0,0,6,0"/>
+                <Button x:Name="BtnCancelSettings"
+                        Grid.Column="1"
+                        Content="Cancel"
+                        Click="BtnCancelSettings_Click"
+                        Foreground="WhiteSmoke"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Margin="6,0,0,0"/>
+            </Grid>
+
+            <!-- Status message -->
+            <TextBlock x:Name="TxtStatus"
+                       Foreground="#5DBB8A"
+                       FontSize="12"
+                       HorizontalAlignment="Center"
+                       Text=""/>
+
+        </StackPanel>
+    </Border>
+</Window>
