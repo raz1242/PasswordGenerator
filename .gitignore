@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/PasswordManager.Server/PAIRING_CODE
+/PasswordManager.Server/network.key
+/PasswordManager.Server/Dockerfile
