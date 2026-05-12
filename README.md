@@ -2,6 +2,14 @@
 
 A self-hosted, client-server password management system built with C#. It features a clean desktop interface and a secure ASP.NET Core backend that utilizes Windows DPAPI for encryption at rest.
 
+## Screenshots
+
+| Main Interface | Connection Settings | Server Window |
+| :---: | :---: | :---: |
+| ![Main Window](screenshots/main_window.png) | ![Settings Window](screenshots/settings_window.png) | ![Server Window](screenshots/server.png) |
+
+> *Note: The UI is built with Avalonia UI and supports Dark Mode by default.*
+
 ## Architecture
 
 The project is split into three main components (N-Tier architecture):
@@ -31,7 +39,6 @@ The project is split into three main components (N-Tier architecture):
 ### 1. Run the Server
 1. Navigate to the `PasswordManager.Server` directory.
 2. Run the application:
-   ```bash
    dotnet run
 On first run, the server will generate a database inside %APPDATA%\PasswordManager\.
 Locate your Pairing Code (API Key). Depending on your setup, this is generated and saved by the server (e.g., in a PAIRING_CODE.txt file).
